@@ -1,20 +1,31 @@
-import React from 'react'
-
-const Counter = ({counter, inc, dec, rnd}) => {
+import { connect } from 'react-redux'
+import * as actions from '../actions'
+import { bindActionCreators } from 'redux'
+const Counter = ({ counter, inc, dec, rnd }) => {
 	return (
 		<div className='jumbotron'>
 			<h1>{counter}</h1>
-			<button className='btn btn-primary' onClick={dec}>
+			<button onClick={dec} className='btn btn-primary'>
 				DEC
 			</button>
-			<button className='btn btn-primary' onClick={inc}>
+			<button onClick={inc} className='btn btn-primary'>
 				INC
 			</button>
-			<button className='btn btn-primary' onClick={rnd}>
+			<button onClick={rnd} className='btn btn-primary'>
 				RND
 			</button>
 		</div>
 	)
 }
 
-export default Counter
+const mapStateToPtops = state => {
+	return {
+		counter: state.value,
+	}
+}
+// const mapDispatchToProps = dispatch => {
+// 	return  bindActionCreators(actions, dispatch)
+
+// }
+
+export default connect(mapStateToPtops, actions)(Counter)
